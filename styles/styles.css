@@ -18,15 +18,12 @@ header {
 
 #scaleLengthTable {
 	text-align: center;
-	font-size: 125%;
+	font-size: 105%;
 	font-family: Garamond, serif;
-	display: inline-block;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 #scaleLengthTable > tr > th {
-	font-size: 135%;
+	font-size: 115%;
 }
 
 #scaleLengthTable > tr:nth-child(odd) {
