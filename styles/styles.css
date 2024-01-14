@@ -1,25 +1,38 @@
-body {
+* {
 	padding: 0;
 	margin: 0;
 }
+
+header {
+	background-color: #0A3410;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: #FFFFFF;
+	font-family: Garamond, serif;
+}
+
+#step1 {
+	background-color: ;
+}
+
 #scaleLengthTable {
 	text-align: center;
 	font-size: 125%;
-	background-color: #2196f3;
-	display: inline-block;
 	font-family: Garamond, serif;
-	font-weight: bold;
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #scaleLengthTable > tr > th {
 	font-size: 135%;
-	border-style: solid;
-	border-color: #000000;
-	border-width: 2px;
 }
 
-#scaleLengthTable > tr > td {
-	border-style: solid;
-	border-color: #000000;
-	border-width: 2px;
+#scaleLengthTable > tr:nth-child(odd) {
+	background-color: lightgray;
+}
+
+#scaleLengthTable > tr:nth-child(even) {
+	background-color: white;
 }
