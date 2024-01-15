@@ -1,35 +1,55 @@
 function promptForScaleLength() { // Prompts user for the scale length of their instrument
 	scaleLength = prompt("What is your desired scale length?"); 
-	document.getElementById("printScaleLength").innerHTML = "Your scale length is " + scaleLength + " inches.";
+	if (scaleLength > 12 && scaleLength < 40) {
+		document.getElementById("printScaleLength").innerHTML = "Your scale length is " + scaleLength + " inches.";
+	}
+	else {
+		alert("Woah! That scale length is way too short or long! Try a more conservative number!");
+		scaleLength = 0;
+	}
 }
+
 const fretDists = []; // An array that is filled with values by the below for loop	
+
 function promptForNumFrets() { // Prompts user for the number of frets on their instrument
 	numFrets = prompt("How many frets will you have?"); 
-	document.getElementById("printNumFrets").innerHTML = "You have " + numFrets + " frets.";
+	if (numFrets < 35) {
+		document.getElementById("printNumFrets").innerHTML = "You have " + numFrets + " frets.";
+	}
+	else {
+		alert ("Woah! That's too many frets! Please enter a smaller number.");
+		numFrets = 0;
+	}
+}
 
 	
-	let testing = 0; // Placeholder value, updated by the below for loop
-	let distFromNut = 0; // Placeholder value, updated by the below for loop
-	let main_table = document.getElementById("scaleLengthTable");
-
-	for (let i = 0; i < numFrets; i++) {
-		// Create new row and cells for the table
-		let row = document.createElement("tr");
-		let cell1 = document.createElement("td");
-		let cell2 = document.createElement("td");
+function	genChart() {
 	
-		testing = (scaleLength - distFromNut) / 17.817;
-		fretDists.push(testing);
-		distFromNut = fretDists[i] + distFromNut;
+	if (numFrets > 0 && scaleLength > 0) {
 
-		// Add the cells to the row and the row to the table body
-		cell1.appendChild(document.createTextNode(i + 1));
-		cell2.appendChild(document.createTextNode(distFromNut.toFixed(4) + '"'));
-		row.appendChild(cell1);
-		row.appendChild(cell2);
-		main_table.appendChild(row);
+		let testing = 0; // Placeholder value, updated by the below for loop
+		let distFromNut = 0; // Placeholder value, updated by the below for loop
+		let main_table = document.getElementById("scaleLengthTable");
+
+		for (let i = 0; i < numFrets; i++) {
+			// Create new row and cells for the table
+			let row = document.createElement("tr");
+			let cell1 = document.createElement("td");
+			let cell2 = document.createElement("td");
+	
+			testing = (scaleLength - distFromNut) / 17.817;
+			fretDists.push(testing);
+			distFromNut = fretDists[i] + distFromNut;
+
+			// Add the cells to the row and the row to the table body
+			cell1.appendChild(document.createTextNode(i + 1));
+			cell2.appendChild(document.createTextNode(distFromNut.toFixed(4) + '"'));
+			row.appendChild(cell1);
+			row.appendChild(cell2);
+			main_table.appendChild(row);
 			
-		document.getElementById("tableHeader").innerHTML = "Scale Length = " + scaleLength + '" -  ' + numFrets + " Frets";
+			document.getElementById("tableHeader").innerHTML = "Scale Length = " + scaleLength + '" -  ' + numFrets + " Frets";
+		}
 	}
 }
 
