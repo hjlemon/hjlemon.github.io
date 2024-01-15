@@ -14,6 +14,29 @@ header {
 
 button {
 	font-size: 200%;
+	color: #FFFFFF;
+	background-color: #0A3410;
+	font-family: Garamond, serif;
+}
+
+h2 {
+	font-family: Garamond, serif;
+}
+
+p {
+	font-size: 150%;
+}
+
+#step1 {
+	text-align: center;
+}
+
+#step2 {
+	text-align: center;
+}
+
+#step3 {
+	text-align: center;
 }
 
 #scaleLengthTable {
