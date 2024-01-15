@@ -1,0 +1,75 @@
+body {
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header {
+	background-color: #0A3410;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	color: #FFFFFF;
+	font-family: Garamond, serif;
+}
+
+button {
+	font-size: 200%;
+	color: #FFFFFF;
+	background-color: #0A3410;
+	font-family: Garamond, serif;
+}
+
+button:hover {
+	background-color: green;
+}
+
+button:focus {
+	background-color: lime;
+}
+
+h2 {
+	font-family: Garamond, serif;
+}
+
+p {
+	font-size: 150%;
+}
+
+#step1 {
+	text-align: center;
+}
+
+#step2 {
+	text-align: center;
+}
+
+#step3 {
+	text-align: center;
+}
+
+#step4 {
+	text-align: center;
+}
+
+#step5 {
+	text-align: center;
+}
+
+#scaleLengthTable {
+	text-align: center;
+	font-size: 105%;
+	font-family: Garamond, serif;
+}
+
+#scaleLengthTable > tr > th {
+	font-size: 115%;
+}
+
+#scaleLengthTable > tr:nth-child(odd) {
+	background-color: lightgray;
+}
+
+#scaleLengthTable > tr:nth-child(even) {
+	background-color: white;
+}
