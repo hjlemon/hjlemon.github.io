@@ -24,7 +24,7 @@
 			<p id="printNumFrets"></p>
 			
 			<p>c: </p>
-			<button onclick="genChart()">Generate a fret chart</button>
+			<button onclick="genChart()">Generate the fret distances</button>
 			
 			<table>
 				<tbody id="scaleLengthTable">
@@ -50,15 +50,26 @@
 			<hr>
 		
 		<div id="step3">
-			<h2>Step 3: What is the crown height of your frets? What is the desired string height?</h2>
-			<p>a: </p>
-			<button onclick="crownHeight()">Enter your crown height</button>
+			<h2>Step 3: What is the crown height of your frets?</h2>
+			<button onclick="calcCrownHeight()">Enter your crown height</button>
 			<p id="crownHeight"></p>
+		</div>
+		
+			<hr>
 			
-			<p>b: </p>
+		<div id="step4">
+			<h2>Step 4: What is the desired string height?</h2>
 			<button onclick="stringHeight()">Enter your string height</button>
 			<p id="firstFretHeight"></p>
 			<p id="twelveFretHeight"></p>
+		</div>	
+
+			<hr>
+		
+		<div id="step5">
+			<h2>Step 5: Calculate the string height at the nut.</h2>
+			<button onclick="calcNutHeight()">Calculate nut height</button>
+			<p id="nutHeight"></p>
 		</div>
 		
 	</body>
