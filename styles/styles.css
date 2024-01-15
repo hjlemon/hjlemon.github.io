@@ -3,6 +3,12 @@
 	margin: 0;
 }
 
+body {
+	width: 30%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 header {
 	background-color: #0A3410;
 	text-align: center;
