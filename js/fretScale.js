@@ -1,10 +1,14 @@
 function promptForScaleLength() { // Prompts user for the scale length of their instrument
 	scaleLength = prompt("What is your desired scale length?"); 
-	if (scaleLength > 12 && scaleLength < 40) {
+	if (scaleLength >= 12 && scaleLength <= 40) {
 		document.getElementById("printScaleLength").innerHTML = "Your scale length is " + scaleLength + " inches.";
 	}
+	else if (scaleLength < 12) {
+		alert("Woah! That scale length is way too short! Try a number between 12 and 40.");
+		scaleLength = 0;
+	}
 	else {
-		alert("Woah! That scale length is way too short or long! Try a more conservative number!");
+		alert("Woah! That scale length is way too long! Try a number between 12 and 40.");
 		scaleLength = 0;
 	}
 }
@@ -13,11 +17,15 @@ const fretDists = []; // An array that is filled with values by the below for lo
 
 function promptForNumFrets() { // Prompts user for the number of frets on their instrument
 	numFrets = prompt("How many frets will you have?"); 
-	if (numFrets < 35) {
+	if (numFrets <= 35 && numFrets >= 12) {
 		document.getElementById("printNumFrets").innerHTML = "You have " + numFrets + " frets.";
 	}
+	else if (numFrets <= 12){
+		alert ("Woah! That's way too few frets! Please enter a number between 12 and 35.");
+		numFrets = 0;
+	}
 	else {
-		alert ("Woah! That's too many frets! Please enter a smaller number.");
+		alert ("Woah! That's way too many frets! Please enter a number between 12 and 35.");
 		numFrets = 0;
 	}
 }
@@ -64,11 +72,43 @@ function oneToTwelveDist() {
 
 function crownHeight() {
 	let crownHeight = prompt("What is the crown height of your frets?");
-	document.getElementById("crownHeight").innerHTML = "The crown height of your frets is " + crownHeight + " inches.";
+	if (crownHeight >= 0.035 && crownHeight <= 0.055) {
+		document.getElementById("crownHeight").innerHTML = "The crown height of your frets is " + crownHeight + " inches.";
+	}
+	else if (crownHeight < 0.035) {
+		alert("Woah! That crown height is way too short! Try a number between 0.035 and 0.055.");
+		crownHeight = 0;
+	}
+	else {
+		alert("Woah! That crown height is way too tall! Try a number between 0.035 and 0.055.");
+		crownHeight = 0;
+	}
 }
 
 function stringHeight() {
 	let firstHeight = prompt("What is your desired string height above the 1st fret?");
+	if (firstHeight >= 0.005 && firstHeight <= 0.100) {
+		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + firstHeight + " inches above the 1st fret.";
+	}
+	else if (firstHeight < 0.005) {
+		alert("Woah! That string height is way too low! Try a number between 0.005 and 0.100.");
+		firstHeight = 0;
+	}
+	else {
+		alert("Woah! That string height is way too high! Try a number between 0.005 and 0.100.");
+		firstHeight = 0;
+	}
+	
 	let twelveHeight = prompt("What is your desired string height above the 12th fret?");
-	document.getElementById("stringHeight").innerHTML = "The desired height of your string is " + firstHeight + " inches above the 1st fret, and " + twelveHeight + " inches above the 12th fret.";
+	if (twelveHeight >= 0.080 && twelveHeight <= 0.300) {
+		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + twelveHeight + " inches above the 12th fret.";
+	}
+	else if (twelveHeight < 0.080) {
+		alert("Woah! That string height is way too low! Try a number between 0.005 and 0.100.");
+		twelveHeight = 0;
+	}
+	else {
+		alert("Woah! That string height is way too high! Try a number between 0.005 and 0.100.");
+		twelveHeight = 0;
+	} 
 }
