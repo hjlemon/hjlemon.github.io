@@ -1,3 +1,14 @@
+// All variables are set as 0 here so that they can be accessed globally
+let scaleLength = 0;
+let numFrets = 0;
+const fretDists = []; // An array that is filled with values by the genChart function
+let distBetween = 0;
+let crownHeight = 0;
+let firstHeight =  0;
+let twelveHeight = 0;
+
+
+
 function promptForScaleLength() { // Prompts user for the scale length of their instrument
 	scaleLength = prompt("What is your desired scale length?"); 
 	if (scaleLength >= 12 && scaleLength <= 40) {
@@ -12,8 +23,6 @@ function promptForScaleLength() { // Prompts user for the scale length of their 
 		scaleLength = 0;
 	}
 }
-
-const fretDists = []; // An array that is filled with values by the below for loop	
 
 function promptForNumFrets() { // Prompts user for the number of frets on their instrument
 	numFrets = prompt("How many frets will you have?"); 
@@ -62,16 +71,14 @@ function	genChart() {
 }
 
 function oneToTwelveDist() {
-	let distBetween = 0;
 	for (let j = 1; j < 12; j++) {
 		distBetween = distBetween + fretDists[j];
 	}
-	
 	document.getElementById("1to12Dist").innerHTML = "The distance from the 1st fret to the 12th fret is " + distBetween.toFixed(4) + " inches.";
 }
 
-function crownHeight() {
-	let crownHeight = prompt("What is the crown height of your frets?");
+function calcCrownHeight() {
+	crownHeight = prompt("What is the crown height of your frets?");
 	if (crownHeight >= 0.035 && crownHeight <= 0.055) {
 		document.getElementById("crownHeight").innerHTML = "The crown height of your frets is " + crownHeight + " inches.";
 	}
@@ -86,7 +93,7 @@ function crownHeight() {
 }
 
 function stringHeight() {
-	let firstHeight = prompt("What is your desired string height above the 1st fret?");
+	firstHeight = prompt("What is your desired string height above the 1st fret?");
 	if (firstHeight >= 0.005 && firstHeight <= 0.100) {
 		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + firstHeight + " inches above the 1st fret.";
 	}
@@ -99,9 +106,9 @@ function stringHeight() {
 		firstHeight = 0;
 	}
 	
-	let twelveHeight = prompt("What is your desired string height above the 12th fret?");
+	twelveHeight = prompt("What is your desired string height above the 12th fret?");
 	if (twelveHeight >= 0.080 && twelveHeight <= 0.300) {
-		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + twelveHeight + " inches above the 12th fret.";
+		document.getElementById("twelveFretHeight").innerHTML = "The desired height of your strings is " + twelveHeight + " inches above the 12th fret.";
 	}
 	else if (twelveHeight < 0.080) {
 		alert("Woah! That string height is way too low! Try a number between 0.005 and 0.100.");
@@ -111,4 +118,23 @@ function stringHeight() {
 		alert("Woah! That string height is way too high! Try a number between 0.005 and 0.100.");
 		twelveHeight = 0;
 	} 
+}
+
+function calcNutHeight() {
+	distBetween = parseFloat(distBetween);
+	firstHeight = parseFloat(firstHeight);
+	twelveHeight = parseFloat(twelveHeight);
+	crownHeight = parseFloat(crownHeight);
+	
+	let fretHyp1 = Math.sqrt(Math.pow(crownHeight + twelveHeight, 2) + Math.pow(distBetween, 2));
+	let intAng = 90 - ((180/Math.PI) * Math.asin((twelveHeight + crownHeight)/fretHyp1));
+	let missingSide1 = Math.sqrt(Math.pow((crownHeight + firstHeight), 2) + Math.pow(fretHyp1, 2) - (2 * (crownHeight + firstHeight) * fretHyp1 * Math.cos((Math.PI/180) * intAng)));
+	
+	let missingAng1 = ((180/Math.PI)*Math.acos((Math.pow(missingSide1, 2) + Math.pow(firstHeight+crownHeight, 2) - Math.pow(fretHyp1, 2))/(2*missingSide1*(firstHeight+crownHeight))));
+	
+	let angBetweenPlanes = missingAng1 - 90;
+	
+	let nutHeight = (firstHeight + crownHeight) - (fretDists[0] * Math.tan((Math.PI/180) * angBetweenPlanes));
+	
+	document.getElementById("nutHeight").innerHTML = "The height of the bottom of each string slot in the nut above the fretboard surface is " + nutHeight.toFixed(3) + " inches.";
 }
