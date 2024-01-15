@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>Banjo Neck Calculations</title>
+	<title>Banjo Neck Calculator</title>
 	<link rel="stylesheet" href="styles/styles.css">
 	<script src="js/fretScale.js" type="text/javascript"></script>
 	</head>
 	
 	<body>
 		<header>
-			<img id="headerLogo" src="img/logo.png" width="8%">
+			<img id="headerLogo" src="img/logo.png" width="10%">
 			<h1>Banjo Neck Calculator</h1>
 		</header>
 	
 		<div id="step1">
 			<h2>Step 1: Calculate the distances of each fret from the nut:</h2>
 			
-			<button onclick="fretScaleCalc()">Click here to enter your Scale Length and Number of Frets</button>
+			<p>a: </p><p id="printScaleLength"></p>
+			<button onclick="promptForScaleLength()">Click here to enter your scale length</button>
+			
+			<p>b: </p><p id="printNumFrets"></p>
+			<button onclick="promptForNumFrets()">Click here to enter your number of frets</button>
 			
 			<table>
 				<tbody id="scaleLengthTable">
@@ -28,8 +32,27 @@
 					</tr>
 				</tbody>
 			</table>
-			
 		</div>
+		
+			<hr>
+			
+		<div id="step2">
+			<h2>Step 2: Calculate the distance between the 1st and 12th frets</h2>
+			<button onclick="oneToTwelveDist()">Calculate the distance</button>
+			<p id="1to12Dist"></p>
+		</div>
+		
+			<hr>
+		
+		<div id="step3">
+			<h2>Step 3: What is the crown height of your frets? What is the desired string height?</h2>
+			<p>a: </p><p id="crownHeight"></p>
+			<button onclick="crownHeight()">Enter your crown height</button>
+			
+			<p>b: </p><p id="stringHeight"></p>
+			<button onclick="stringHeight()">Enter your string height</button>
+		</div>
+		
 	</body>
 	
 	
