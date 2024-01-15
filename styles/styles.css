@@ -1,10 +1,5 @@
-* {
-	padding: 0;
-	margin: 0;
-}
-
 body {
-	width: 30%;
+	width: 40%;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -25,6 +20,14 @@ button {
 	font-family: Garamond, serif;
 }
 
+button:hover {
+	background-color: green;
+}
+
+button:focus {
+	background-color: lime;
+}
+
 h2 {
 	font-family: Garamond, serif;
 }
@@ -42,6 +45,14 @@ p {
 }
 
 #step3 {
+	text-align: center;
+}
+
+#step4 {
+	text-align: center;
+}
+
+#step5 {
 	text-align: center;
 }
 
