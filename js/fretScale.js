@@ -2,6 +2,7 @@
 let scaleLength = 0;
 let numFrets = 0;
 const fretDists = []; // An array that is filled with values by the genChart function
+let distFromNut = 0; // Placeholder value, updated by the below for loop
 let distBetween = 0;
 let crownHeight = 0;
 let firstHeight =  0;
@@ -45,7 +46,6 @@ function	genChart() {
 	if (numFrets > 0 && scaleLength > 0) {
 
 		let testing = 0; // Placeholder value, updated by the below for loop
-		let distFromNut = 0; // Placeholder value, updated by the below for loop
 		let main_table = document.getElementById("scaleLengthTable");
 
 		for (let i = 0; i < numFrets; i++) {
@@ -92,7 +92,7 @@ function calcCrownHeight() {
 	}
 }
 
-function stringHeight() {
+function stringHeightfirst() {
 	firstHeight = prompt("What is your desired string height above the 1st fret?");
 	if (firstHeight >= 0.005 && firstHeight <= 0.100) {
 		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + firstHeight + " inches above the 1st fret.";
@@ -105,7 +105,9 @@ function stringHeight() {
 		alert("Woah! That string height is way too high! Try a number between 0.005 and 0.100.");
 		firstHeight = 0;
 	}
-	
+}
+
+function stringHeighttwelve() {
 	twelveHeight = prompt("What is your desired string height above the 12th fret?");
 	if (twelveHeight >= 0.080 && twelveHeight <= 0.300) {
 		document.getElementById("twelveFretHeight").innerHTML = "The desired height of your strings is " + twelveHeight + " inches above the 12th fret.";
@@ -120,11 +122,15 @@ function stringHeight() {
 	} 
 }
 
+let distToIntersection = 0; // From first fret to the point at which the plane of the fretboard intersects the plane of the strings
+let angBetweenPlanes = 0;
+
 function calcNutHeight() {
 	distBetween = parseFloat(distBetween);
 	firstHeight = parseFloat(firstHeight);
 	twelveHeight = parseFloat(twelveHeight);
 	crownHeight = parseFloat(crownHeight);
+	
 	
 	let fretHyp1 = Math.sqrt(Math.pow(crownHeight + twelveHeight, 2) + Math.pow(distBetween, 2));
 	let intAng = 90 - ((180/Math.PI) * Math.asin((twelveHeight + crownHeight)/fretHyp1));
@@ -132,9 +138,49 @@ function calcNutHeight() {
 	
 	let missingAng1 = ((180/Math.PI)*Math.acos((Math.pow(missingSide1, 2) + Math.pow(firstHeight+crownHeight, 2) - Math.pow(fretHyp1, 2))/(2*missingSide1*(firstHeight+crownHeight))));
 	
-	let angBetweenPlanes = missingAng1 - 90;
+	angBetweenPlanes = missingAng1 - 90;
 	
 	let nutHeight = (firstHeight + crownHeight) - (fretDists[0] * Math.tan((Math.PI/180) * angBetweenPlanes));
 	
 	document.getElementById("nutHeight").innerHTML = "The height of the bottom of each string slot in the nut above the fretboard surface is " + nutHeight.toFixed(3) + " inches.";
+	
+	distToIntersection = (Math.sin((Math.PI/180)*(90-angBetweenPlanes))*(crownHeight+firstHeight))/Math.sin((Math.PI/180)*angBetweenPlanes);
+}
+
+lastFretDist = 0;
+let afterlength = 0;
+
+function calcLastFret() {
+	lastFret = prompt("What is the last fret before your neck joins the pot assembly?");
+	for (let w = 0; w < lastFret; w++) {
+		lastFretDist = lastFretDist + fretDists[w];
+	}
+	document.getElementById("lastFret").innerHTML = "The last fret is " + lastFret + "."
+}
+
+stringHeightAtTensionHoop = 0;
+stringHeightEnd = 0; // The distance between planes at the bridge
+
+function calcHeightAtEnd() {
+	afterlength = prompt("What is the afterlength of your fretboard?");
+	intToEndOfFB = (distToIntersection - fretDists[0]) + lastFretDist + parseFloat(afterlength);
+	document.getElementById("afterlength").innerHTML = "The afterlength of your fretboard is " + afterlength + " inches."
+	stringHeightAtTensionHoop = intToEndOfFB * Math.tan((Math.PI/180) * angBetweenPlanes);
+	stringHeightEnd = ((distToIntersection - fretDists[0]) + parseFloat(scaleLength)) * Math.tan((Math.PI/180) * angBetweenPlanes);
+}
+
+fretboardEndHeight = 0;
+
+function promptFretBoardHeight() {
+	fretboardEndHeight = prompt("How far above the head do you want the end of the fretboard to be?");
+	document.getElementById("FBHeight").innerHTML = "The top of the fretboard will be " + fretboardEndHeight + " inches above the top of the head."
+}
+
+bridgeHeight = 0;
+recalcBridge = 0;
+
+function calcBridgeHeight() {
+	bridgeHeight = prompt("How tall is your bridge?");
+	document.getElementById("bridgeHeight").innerHTML = "Your bridge is " + bridgeHeight + " inches tall.";
+	recalcBridge = bridgeHeight - fretboardEndHeight;
 }
