@@ -8,23 +8,23 @@
 	
 	<body>
 		<header>
-			<img id="headerLogo" src="img/logo.png" width="20%">
+			<img id="headerLogo" src="img/logo.png" width="25%">
 			<h1>Banjo Neck Calculator</h1>
 		</header>
 	
-		<div id="step1">
+		<div id="step1" class="steps">
 			<h2>Step 1: Calculate the distances of each fret from the nut:</h2>
 			
-			<p>a: </p>
 			<button onclick="promptForScaleLength()">Enter your scale length</button>
-			<p id="printScaleLength"></p>
-			
-			<p>b: </p>
+			<p id="printScaleLength" class="answers"></p>
+
 			<button onclick="promptForNumFrets()">Enter your number of frets</button>
-			<p id="printNumFrets"></p>
-			
-			<p>c: </p>
+			<p id="printNumFrets" class="answers"></p>
+
 			<button onclick="genChart()">Generate the fret distances</button>
+			<br>
+			<br>
+			<br>
 			
 			<table>
 				<tbody id="scaleLengthTable">
@@ -41,37 +41,71 @@
 		
 			<hr>
 			
-		<div id="step2">
+		<div id="step2" class="steps">
 			<h2>Step 2: Calculate the distance between the 1st and 12th frets</h2>
 			<button onclick="oneToTwelveDist()">Calculate the distance</button>
-			<p id="1to12Dist"></p>
+			<p id="1to12Dist" class="answers"></p>
 		</div>
 		
 			<hr>
 		
-		<div id="step3">
+		<div id="step3" class="steps">
 			<h2>Step 3: What is the crown height of your frets?</h2>
 			<button onclick="calcCrownHeight()">Enter your crown height</button>
-			<p id="crownHeight"></p>
+			<p id="crownHeight" class="answers"></p>
 		</div>
 		
 			<hr>
 			
-		<div id="step4">
+		<div id="step4" class="steps">
 			<h2>Step 4: What is the desired string height?</h2>
-			<button onclick="stringHeight()">Enter your string height</button>
-			<p id="firstFretHeight"></p>
-			<p id="twelveFretHeight"></p>
+			<button onclick="stringHeightfirst()">Enter your string height at 1st fret</button>
+			<p id="firstFretHeight" class="answers"></p>
+			<button onclick="stringHeighttwelve()">Enter your string height at 12th fret</button>
+			<p id="twelveFretHeight" class="answers"></p>
 		</div>	
 
 			<hr>
 		
-		<div id="step5">
+		<div id="step5" class="steps">
 			<h2>Step 5: Calculate the string height at the nut.</h2>
 			<button onclick="calcNutHeight()">Calculate nut height</button>
-			<p id="nutHeight"></p>
+			<p id="nutHeight" class="answers"></p>
 		</div>
 		
+			<hr>
+		
+		<div id="step6" class="steps">
+			<h2>Step 6: What number is the last fret before the neck joins the pot assembly?</h2>
+			<p>(This number is 22 on a typical bluegrass banjo)</p>
+			<button onclick="calcLastFret()">Enter the last fret</button>
+			<p id="lastFret" class="answers"></p>
+		</div>
+			
+			<hr>
+			
+		<div id="step7" class="steps">		
+			<h2>Step 7: How much space between the last fret and the tension hoop?</h2>
+			<p>(This will typically be the last fret before the neck attaches to the pot assembly.)</p>
+			<button onclick="calcHeightAtEnd()">Enter the afterlength</button>
+			<p id="afterlength" class="answers"></p>
+		</div>
+		
+			<hr>
+		
+		<div id="step8" class="steps">		
+			<h2>Step 8: How far above the head do you want the top of the fretboard to be?</h2>
+			<button onclick="promptFretBoardHeight()">Enter the heigth of the fretboard</button>
+			<p id="FBHeight" class="answers"></p>
+		</div>
+		
+			<hr>
+		
+		<div id="step9" class="steps">		
+			<h2>Step 9: How tall is your bridge?</h2>
+			<button onclick="calcBridgeHeight()">Enter your bridge height</button>
+			<p id="bridgeHeight" class="answers"></p>
+		</div>
 	</body>
 	
 	
