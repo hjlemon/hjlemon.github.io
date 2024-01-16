@@ -36,24 +36,14 @@ p {
 	font-size: 150%;
 }
 
-#step1 {
+.steps {
 	text-align: center;
 }
 
-#step2 {
-	text-align: center;
-}
-
-#step3 {
-	text-align: center;
-}
-
-#step4 {
-	text-align: center;
-}
-
-#step5 {
-	text-align: center;
+.answers {
+	color: red;
+	font-style: italic;
+	font-weight: bold;
 }
 
 #scaleLengthTable {
