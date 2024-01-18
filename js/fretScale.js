@@ -71,9 +71,12 @@ function	genChart() {
 }
 
 function oneToTwelveDist() {
-	for (let j = 1; j < 12; j++) {
-		distBetween = distBetween + fretDists[j];
-	}
+	//for (let j = 1; j < 12; j++) {
+		//distBetween = distBetween + fretDists[j];
+	//}
+
+	distBetween = (scaleLength / 2) - fretDists[0];
+	
 	document.getElementById("1to12Dist").innerHTML = "The distance from the 1st fret to the 12th fret is " + distBetween.toFixed(4) + " inches.";
 }
 
