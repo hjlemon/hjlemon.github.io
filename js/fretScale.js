@@ -76,7 +76,8 @@ function oneToTwelveDist() {
 	//}
 
 	distBetween = (scaleLength / 2) - fretDists[0];
-	
+
+	console.log(distBetween);
 	document.getElementById("1to12Dist").innerHTML = "The distance from the 1st fret to the 12th fret is " + distBetween.toFixed(4) + " inches.";
 }
 
