@@ -14,6 +14,7 @@ function promptForScaleLength() { // Prompts user for the scale length of their 
 	scaleLength = prompt("What is your desired scale length?"); 
 	if (scaleLength >= 12 && scaleLength <= 40) {
 		document.getElementById("printScaleLength").innerHTML = "Your scale length is " + scaleLength + " inches.";
+		console.log("Scale Length: " + scaleLength);
 	}
 	else if (scaleLength < 12) {
 		alert("Woah! That scale length is way too short! Try a number between 12 and 40.");
@@ -29,6 +30,7 @@ function promptForNumFrets() { // Prompts user for the number of frets on their 
 	numFrets = prompt("How many frets will you have?"); 
 	if (numFrets <= 35 && numFrets >= 12) {
 		document.getElementById("printNumFrets").innerHTML = "You have " + numFrets + " frets.";
+		console.log("Frets: " + numFrets);
 	}
 	else if (numFrets <= 12){
 		alert ("Woah! That's way too few frets! Please enter a number between 12 and 35.");
@@ -53,6 +55,7 @@ function	genChart() {
 			let row = document.createElement("tr");
 			let cell1 = document.createElement("td");
 			let cell2 = document.createElement("td");
+			let cell3 = document.createElement("td");
 	
 			testing = (scaleLength - distFromNut) / 17.817;
 			fretDists.push(testing);
@@ -61,8 +64,10 @@ function	genChart() {
 			// Add the cells to the row and the row to the table body
 			cell1.appendChild(document.createTextNode(i + 1));
 			cell2.appendChild(document.createTextNode(distFromNut.toFixed(4) + '"'));
+			cell3.appendChild(document.createTextNode(fretDists[i].toFixed(4) + '"' + "(" + i + "-" + (i + 1) + ")"));
 			row.appendChild(cell1);
 			row.appendChild(cell2);
+			row.appendChild(cell3);
 			main_table.appendChild(row);
 			
 			document.getElementById("tableHeader").innerHTML = "Scale Length = " + scaleLength + '" -  ' + numFrets + " Frets";
@@ -71,20 +76,16 @@ function	genChart() {
 }
 
 function oneToTwelveDist() {
-	//for (let j = 1; j < 12; j++) {
-		//distBetween = distBetween + fretDists[j];
-	//}
-
 	distBetween = (scaleLength / 2) - fretDists[0];
-
-	console.log(distBetween);
 	document.getElementById("1to12Dist").innerHTML = "The distance from the 1st fret to the 12th fret is " + distBetween.toFixed(4) + " inches.";
+	console.log("Distance from 1st fret to 12th fret: " + distBetween);
 }
 
 function calcCrownHeight() {
 	crownHeight = prompt("What is the crown height of your frets?");
 	if (crownHeight >= 0.035 && crownHeight <= 0.055) {
 		document.getElementById("crownHeight").innerHTML = "The crown height of your frets is " + crownHeight + " inches.";
+		console.log("Fret Crown Height: " + crownHeight);
 	}
 	else if (crownHeight < 0.035) {
 		alert("Woah! That crown height is way too short! Try a number between 0.035 and 0.055.");
@@ -100,6 +101,7 @@ function stringHeightfirst() {
 	firstHeight = prompt("What is your desired string height above the 1st fret?");
 	if (firstHeight >= 0.005 && firstHeight <= 0.100) {
 		document.getElementById("firstFretHeight").innerHTML = "The desired height of your strings is " + firstHeight + " inches above the 1st fret.";
+		console.log("String Height at first fret: " + firstHeight);
 	}
 	else if (firstHeight < 0.005) {
 		alert("Woah! That string height is way too low! Try a number between 0.005 and 0.100.");
@@ -115,6 +117,7 @@ function stringHeighttwelve() {
 	twelveHeight = prompt("What is your desired string height above the 12th fret?");
 	if (twelveHeight >= 0.080 && twelveHeight <= 0.300) {
 		document.getElementById("twelveFretHeight").innerHTML = "The desired height of your strings is " + twelveHeight + " inches above the 12th fret.";
+		console.log("String Height at twelvth fret: " + twelveHeight);
 	}
 	else if (twelveHeight < 0.080) {
 		alert("Woah! That string height is way too low! Try a number between 0.005 and 0.100.");
@@ -164,6 +167,7 @@ function calcLastFret() {
 
 stringHeightAtTensionHoop = 0;
 stringHeightEnd = 0; // The distance between planes at the bridge
+intToEndOfFB = 0;
 
 function calcHeightAtEnd() {
 	afterlength = prompt("What is the afterlength of your fretboard?");
@@ -187,4 +191,13 @@ function calcBridgeHeight() {
 	bridgeHeight = prompt("How tall is your bridge?");
 	document.getElementById("bridgeHeight").innerHTML = "Your bridge is " + bridgeHeight + " inches tall.";
 	recalcBridge = bridgeHeight - fretboardEndHeight;
+}
+
+function calcNeckAngle() {
+	let side1 = ((distToIntersection - fretDists[0]) + parseFloat(scaleLength)) - intToEndOfFB;
+	
+	let neckAngle = (180/Math.PI) * Math.asin((recalcBridge - stringHeightEnd) / side1);
+	
+	document.getElementById("neckAngle").innerHTML = "Your neck angle will be " + neckAngle.toFixed(2) + " degrees.";
+	
 }
