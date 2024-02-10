@@ -58,13 +58,14 @@ function	genChart() {
 			let cell3 = document.createElement("td");
 	
 			testing = (scaleLength - distFromNut) / 17.817;
-			fretDists.push(testing);
+			testing2 = parseFloat(testing.toFixed(3));
+			fretDists.push(testing2);
 			distFromNut = fretDists[i] + distFromNut;
 
 			// Add the cells to the row and the row to the table body
 			cell1.appendChild(document.createTextNode(i + 1));
-			cell2.appendChild(document.createTextNode(distFromNut.toFixed(4) + '"'));
-			cell3.appendChild(document.createTextNode(fretDists[i].toFixed(4) + '"' + "(" + i + "-" + (i + 1) + ")"));
+			cell2.appendChild(document.createTextNode(distFromNut.toFixed(3) + '"'));
+			cell3.appendChild(document.createTextNode(fretDists[i] + '"' + "(" + i + "-" + (i + 1) + ")"));
 			row.appendChild(cell1);
 			row.appendChild(cell2);
 			row.appendChild(cell3);
@@ -138,20 +139,29 @@ function calcNutHeight() {
 	twelveHeight = parseFloat(twelveHeight);
 	crownHeight = parseFloat(crownHeight);
 	
-	
+	// Checked, calculates correctly
 	let fretHyp1 = Math.sqrt(Math.pow(crownHeight + twelveHeight, 2) + Math.pow(distBetween, 2));
+	
+	// Checked, calculates correctly
 	let intAng = 90 - ((180/Math.PI) * Math.asin((twelveHeight + crownHeight)/fretHyp1));
+	
+	// Checked, calculates correctly
 	let missingSide1 = Math.sqrt(Math.pow((crownHeight + firstHeight), 2) + Math.pow(fretHyp1, 2) - (2 * (crownHeight + firstHeight) * fretHyp1 * Math.cos((Math.PI/180) * intAng)));
 	
+	// Calculates at 0.46 degrees, was calculated by hand at 0.44. Results in 0.009" difference over 26.375 inches.
 	let missingAng1 = ((180/Math.PI)*Math.acos((Math.pow(missingSide1, 2) + Math.pow(firstHeight+crownHeight, 2) - Math.pow(fretHyp1, 2))/(2*missingSide1*(firstHeight+crownHeight))));
+	
 	
 	angBetweenPlanes = missingAng1 - 90;
 	
+	// Checked, calculates correctly
 	let nutHeight = (firstHeight + crownHeight) - (fretDists[0] * Math.tan((Math.PI/180) * angBetweenPlanes));
+	
+	console.log("Height of strings at nut: " + nutHeight.toFixed(3));
 	
 	document.getElementById("nutHeight").innerHTML = "The height of the bottom of each string slot in the nut above the fretboard surface is " + nutHeight.toFixed(3) + " inches.";
 	
-	distToIntersection = (Math.sin((Math.PI/180)*(90-angBetweenPlanes))*(crownHeight+firstHeight))/Math.sin((Math.PI/180)*angBetweenPlanes);
+	distToIntersection = ((Math.sin((Math.PI/180)*(90-angBetweenPlanes))*(crownHeight+firstHeight))/Math.sin((Math.PI/180)*angBetweenPlanes)) - fretDists[0];
 }
 
 lastFretDist = 0;
